@@ -1,9 +1,14 @@
 package dsaProblems.graphds;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Stack;
 
 public class GraphHelper {
 
@@ -319,6 +324,35 @@ public class GraphHelper {
 		             dfsSearch(graph, nextNode, res, path);
 		             path.remove(path.size() - 1);
 		         }
+		     }
+		     public List<String> findItinerary(List<List<String>> tickets) {
+		         Map<String, PriorityQueue<String>> mapEdges = new HashMap<>();
+		         
+		         for(List<String> ticket : tickets) {
+		             PriorityQueue<String> q = mapEdges.getOrDefault(ticket.get(0), new PriorityQueue<String>( (s1, s2) -> s1.compareTo(s2) )) ;
+		             q.offer(ticket.get(1));
+		             mapEdges.put(ticket.get(0), q);
+		         }
+		         
+		         
+		         Stack<String> s = new Stack<>();
+		         s.push("JFK"); // Starting point is JFK
+		         
+		         List<String> finalIternary = new ArrayList<>();
+		         while(!s.isEmpty()) {
+
+		             String source = s.peek();
+		             PriorityQueue<String> q = mapEdges.get(source);
+		             
+		             if(q == null || q.isEmpty()) {
+		                 finalIternary.add(s.pop());
+		             } else {
+		                 s.push(q.poll());
+		             }
+		         }
+		         
+		         Collections.reverse(finalIternary);      
+		         return finalIternary;
 		     }
 	    
 

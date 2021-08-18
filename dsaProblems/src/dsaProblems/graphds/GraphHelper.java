@@ -170,6 +170,41 @@ public class GraphHelper {
 
 			return count == nodeSize ? ans : -1;
 		} 
+		
+		   public boolean possibleBipartition(int n, int[][] dislikes) {
+		        List<List<Integer>> adj=new ArrayList<>();
+		        int[] visited=new int[n+1];
+		        for(int i=0;i<=n;i++){
+		            adj.add(i,new ArrayList<>());
+		        }
+		          for(int i=0;i<dislikes.length;i++){
+		            adj.get(dislikes[i][1]).add(dislikes[i][0]);
+		            adj.get(dislikes[i][0]).add(dislikes[i][1]);
+		        }
+		        
+		        
+		        
+		        for(int i=1;i<=n;++i){
+		            if(visited[i]==0 && !dfs(adj,i,visited,1)){
+		                return false;
+		            }
+		        }
+		        return true;
+		    }
+		    
+		    boolean dfs(List<List<Integer>> adj,int i,int[] visited,int color){
+		        visited[i]=color;
+		        for(int index:adj.get(i)){
+		            if(visited[index]==0 && !dfs(adj,index,visited,-color)){
+		                return false;
+		            }
+		            else if(visited[index]==color){
+		                return false;
+		            }
+		        }
+		        return true;
+		    }
+		    
 	    
 
 }

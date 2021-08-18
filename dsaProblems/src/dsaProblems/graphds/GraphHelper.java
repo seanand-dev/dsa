@@ -260,6 +260,43 @@ public class GraphHelper {
 		        }
 		        return true;
 		    }
+		    public boolean canFinish(int numCourses, int[][] prerequisites) {
+		        
+		        int[] visited=new int[numCourses];
+		        List<List<Integer>> adj=new ArrayList<>();
+		         for (int i = 0; i < numCourses; i++)
+		            adj.add(new ArrayList<>());
+
+		        for (int i = 0; i < prerequisites.length; i++) {
+		            int secondCourse = prerequisites[i][1];
+		            int firstCourse = prerequisites[i][0];
+		            adj.get(secondCourse).add(firstCourse);
+		        }
+		        
+
+		        for(int i=0;i<numCourses;++i){
+		            if(visited[i]==0){
+		            if(isCyclic(i,adj,visited))
+		                return false;
+		            }
+		        }
+		        return true;
+		        
+		    }
+		    
+		    boolean isCyclic(int i,List<List<Integer>> adj,int[] visited){
+		        if(visited[i]==2){
+		            return true;
+		        }
+		        visited[i]=2;
+		        for(int n:adj.get(i)){
+		            if(visited[n]!=1 &&isCyclic(n,adj,visited) ){
+		                return true;
+		            }
+		        }
+		        visited[i]=1;
+		        return false;
+		    }
 	    
 
 }

@@ -53,9 +53,42 @@ public class GraphHelper {
 		}
 	}
 	
-	public boolean detectCycle() {
-		return false;
-	}
+	  public boolean containsCycle(char[][] grid) {
+	        int n=grid.length;
+	        boolean[][] visited=new boolean[n][ grid[0].length];
+	        boolean hasCycle=false;
+	        for(int i=0;i<n;i++){
+	            for(int j=0;j< grid[i].length;j++){
+	                if(!visited[i][j] && isCycle(grid,i,j,visited,grid[i][j]) ){
+	                  return true;
+	                }
+	            }
+	        }
+	        return false;
+	    }
+	    
+	    boolean isCycle(char[][] grid,int i,int j, boolean[][] visited,char target){
+	        
+	          if (i < 0 || j < 0 || i >= grid.length || j >= grid[0].length ||
+	              grid[i][j] != target) {
+	            return false;
+	        }
+	        if(visited[i][j]){
+	           return true; 
+	        }
+	        visited[i][j]=true;
+	        grid[i][j] = '#';
+	        int[] rows={-1,1,0,0};
+	        int[] cols={0,0,-1,1};
+	        boolean hasCycle=false;
+	        for(int index=0;index<4;index++){
+	            int rowIndex=i+rows[index];
+	            int colIndex=j+cols[index];
+	            hasCycle=hasCycle || isCycle(grid,rowIndex,colIndex,visited,target);    
+	            }
+	        grid[i][j] = target;
+	        return hasCycle;
+	    }
 	
 	   public int[] findOrder(int numCourses, int[][] prerequisites) {
 	       if (numCourses == 0) return null;

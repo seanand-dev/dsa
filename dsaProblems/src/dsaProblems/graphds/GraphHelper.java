@@ -237,7 +237,29 @@ public class GraphHelper {
 		        }
 		        return true;
 		    }
+		    public boolean isBipartite(int[][] graph) {
+		        int[] colors=new int[graph.length];
+		        for(int i=0;i<graph.length;i++){
+		            if(colors[i]==0 && !isValid(graph,i,1,colors)){
+		                return false;
+		            }
+		        }
+		        return true;
+		    }
 		    
+		    boolean isValid(int[][] graph,int i,int color,int[] colors){
+		        if(colors[i]!=0){
+		            return colors[i]==color;
+		        }
+		        colors[i]=color;
+		        for(int n:graph[i]){
+		             if(!isValid(graph,n,-color,colors)){
+		                 return false;
+		             
+		            }
+		        }
+		        return true;
+		    }
 	    
 
 }

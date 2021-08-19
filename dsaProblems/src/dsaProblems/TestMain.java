@@ -3,6 +3,8 @@ package dsaProblems;
 import java.util.Arrays;
 import java.util.LinkedList;
 
+import dsaProblems.arrayds.ArrayDS;
+import dsaProblems.arrayds.demo;
 import dsaProblems.graphds.GraphHelper;
 
 public class TestMain {
@@ -26,7 +28,11 @@ public class TestMain {
 				arr[i][j]=i+j;
 			}
 		}
-		hg.dfs(arr);
+		//hg.dfs(arr);
+		
+		ArrayDS demo=new ArrayDS();
+		
+		//System.out.println(demo.removeVowels("leetcodeisacommunityforcoders"));
 		
 	}
 

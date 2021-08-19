@@ -1,7 +1,8 @@
 package dsaProblems;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.List;
 
 import dsaProblems.arrayds.ArrayDS;
 import dsaProblems.graphds.GraphHelper;
@@ -12,14 +13,16 @@ public class TestMain {
 		// TODO Auto-generated method stub
 
 		GraphHelper hg=new GraphHelper();
-		LinkedList<Integer> adj[]= new LinkedList[3];
-		LinkedList<Integer> list1=new LinkedList<>(Arrays.asList(1,2));
-		LinkedList<Integer> list2=new LinkedList<>(Arrays.asList(2));
-		LinkedList<Integer> list3=new LinkedList<>(Arrays.asList(0,2));
+		//LinkedList<Integer> adj[]= new LinkedList[3];
+		ArrayList<Integer> list1=new ArrayList<>(Arrays.asList(0,0,0));
+		ArrayList<Integer> list2=new ArrayList<>(Arrays.asList(0,1,0));
+		ArrayList<Integer> list3=new ArrayList<>(Arrays.asList(1,1,1));
 
-		adj[0]=list1;
-		adj[1]=list2;
-		adj[2]=list3;
+//		adj[0]=list1;
+//		adj[1]=list2;
+//		adj[2]=list3;
+		List<List<Integer>> adjL=new ArrayList<>(Arrays.asList(list1,list2,list3));
+
 	//	hg.bfs(adj, 0, 3);
 		int[][] arr=new int[3][3];
 		for(int i=0;i<3;i++) {
@@ -27,7 +30,7 @@ public class TestMain {
 				arr[i][j]=i+j;
 			}
 		}
-		//hg.dfs(arr);
+		hg.updateMatrix(adjL);
 		
 		ArrayDS demo=new ArrayDS();
 		

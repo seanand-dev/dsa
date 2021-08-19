@@ -356,8 +356,6 @@ public class GraphHelper {
 		return finalIternary;
 	}
 
-	int[][] dirs = new int[][] { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
-
 	public int getFood(char[][] grid) {
 
 		int m = grid.length;
@@ -446,6 +444,42 @@ public class GraphHelper {
 		}
 
 		return size == 1 ? res : -1;
+
+	}
+
+	int[][] dirs = new int[][] { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
+
+	public boolean hasPath(int[][] maze, int[] start, int[] destination) {
+
+		return dfsMaze(maze, start[0], start[1], destination);
+
+	}
+
+	boolean dfsMaze(int[][] maze, int row, int col, int[] destination) {
+
+		if (maze[row][col] == -1) {
+			return false;
+		}
+		if (row == destination[0] && col == destination[1]) {
+			return true;
+		}
+		maze[row][col] = -1;
+
+		for (int[] dir : dirs) {
+			int i = row;
+			int j = col;
+
+			while (i + dir[0] >= 0 && i + dir[0] < maze.length && j + dir[1] >= 0 && j + dir[1] < maze[0].length
+					&& maze[i + dir[0]][j + dir[1]] != 1) {
+				i = i + dir[0];
+				j = j + dir[1];
+			}
+
+			if (dfsMaze(maze, i, j, destination)) {
+				return true;
+			}
+		}
+		return false;
 
 	}
 

@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Set;
 import java.util.Stack;
 
 public class GraphHelper {
@@ -515,5 +517,36 @@ public class GraphHelper {
         
         return matrix;
     }
+    
+    public int numDistinctIslands(int[][] grid) {
+        Set<String> set=new HashSet<>();
+         
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                 StringBuilder sb=new StringBuilder();
+                if(grid[i][j]==1){
+                    dfs(grid,i,j,sb,"o");
+                    grid[i][j]=0;
+                    set.add(sb.toString());
+                }
+            }
+        }
+          return set.size();
+      }
+      
+      void dfs(int[][] grid,int i,int j,StringBuilder sb,String s){
+          if(i<0 || i>=grid.length || j<0 || j>=grid[0].length || grid[i][j]==0){
+              return;
+          }
+         
+          grid[i][j]=0;
+          
+          sb.append(s);
+           dfs(grid,i-1,j,sb,"u"); 
+           dfs(grid,i+1,j,sb,"d"); 
+           dfs(grid,i,j+1,sb,"r"); 
+           dfs(grid,i,j-1,sb,"l"); 
+           sb.append("b");
+      }
 
 }

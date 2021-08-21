@@ -638,6 +638,36 @@ public class GraphHelper {
     	    }
     	    return parents[root];
     	}
+    	
+    	 public int countComponents(int n, int[][] edges) {
+    	     int[]  parent = new int[n];
+    			for (int i = 0; i < n; i++) {
+    				parent[i] = i;
+    			} 
+    	    int ans=0;
+    	        for (int[] con : edges) {
+    	        	int s1=find(con[0],parent);
+    	        	int s2=find(con[1],parent);
+    				if (s1 !=s2 ) {
+    					parent[s1]=s2;
+    				}
+    			}
+    	        for(int i=0;i<n;i++) {
+    	        	if(parent[i]==i) {
+    	        		ans++;
+    	        	}
+    	        }
+    	        
+    	       return ans;
+
+    	    }
+    	    
+    	    	int find(int i,int[] parent) {
+    			if (parent[i] == i) {
+    				return i;
+    			}
+    			return parent[i] = find(parent[i],parent);
+    		}
 
 
 }

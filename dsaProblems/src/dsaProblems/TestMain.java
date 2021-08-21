@@ -31,16 +31,16 @@ public class TestMain {
 			}
 		}
 		
-		int[] a1= {0,0};
-		int[] a2= {0,1};
-		int[] a3= {1,2};
+		int[] a1= {0,1};
+		int[] a2= {1,2};
+		int[] a3= {3,4};
 		int[] a4= {2,1};
-		int[][] grid=new int[4][4];
+		int[][] grid=new int[3][3];
 		grid[0]=a1;
 		grid[1]=a2;
 		grid[2]=a3;
-		grid[3]=a4;
-		hg.numIslands2(3,3,grid);
+		//grid[3]=a4;
+		hg.countComponents(5,grid);
 				
 		
 	}

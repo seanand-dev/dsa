@@ -12,6 +12,7 @@ public class Trie {
 
 		public Node(char ch) {
 			data = ch;
+			map = new HashMap<>();
 			isTerminal = false;
 		}
 	}
@@ -19,19 +20,19 @@ public class Trie {
 	Node root;
 
 	public Trie() {
-		root = new Node('*');
-		root.map = new HashMap<>();
+		this.root = new Node('*');
+		
 	}
 
 	public void insert(String word) {
 		Node temp = root;
 		for (char c : word.toCharArray()) {
-			if (!root.map.containsKey(c)) {
+			if (!temp.map.containsKey(c)) {
 				Node n = new Node(c);
-				root.map.put(c, n);
-			} else {
-				temp = root.map.get(c);
-			}
+				temp.map.put(c, n);
+			} 
+				temp = temp.map.get(c);
+			
 		}
 		temp.isTerminal = true;
 
@@ -40,10 +41,10 @@ public class Trie {
 	public boolean search(String word) {
 		Node temp = root;
 		for (char c : word.toCharArray()) {
-			if (!root.map.containsKey(c)) {
+			if (!temp.map.containsKey(c)) {
 				return false;
 			} else {
-				temp = root.map.get(c);
+				temp = temp.map.get(c);
 			}
 		}
 		return temp.isTerminal;

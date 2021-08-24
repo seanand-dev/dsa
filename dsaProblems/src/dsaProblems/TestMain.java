@@ -47,8 +47,11 @@ public class TestMain {
 	//	ads.longestDiverseString(2,2,1);
 				
 		Trie trie=new Trie();
-		trie.insert("apple");
-		System.out.println(trie.search("apple"));
+		String[] words= {"apple","app","dog","apple","ant"};
+		for(String word:words) {
+			trie.insert(word);
+		}
+		System.out.println(trie.search("dog"));
 	}
 
 }

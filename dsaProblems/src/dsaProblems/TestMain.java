@@ -6,6 +6,7 @@ import java.util.List;
 
 import dsaProblems.arrayds.ArrayDS;
 import dsaProblems.graphds.GraphHelper;
+import dsaProblems.trie.Trie;
 
 public class TestMain {
 
@@ -43,9 +44,11 @@ public class TestMain {
 //		grid[3]=a4;
 //		grid[4]=a5;
 		ArrayDS ads=new ArrayDS();
-		ads.longestDiverseString(2,2,1);
+	//	ads.longestDiverseString(2,2,1);
 				
-		
+		Trie trie=new Trie();
+		trie.insert("apple");
+		System.out.println(trie.search("apple"));
 	}
 
 }

@@ -31,16 +31,19 @@ public class TestMain {
 			}
 		}
 		
-		int[] a1= {0,1};
-		int[] a2= {1,2};
-		int[] a3= {3,4};
-		int[] a4= {2,1};
-		int[][] grid=new int[3][3];
+		int[] a1= {2,1,5};
+		int[] a2= {3,3,7};
+//		int[] a3= {2,2};
+//		int[] a4= {3,4};
+//		int[] a5= {1,1};
+		int[][] grid=new int[2][2];
 		grid[0]=a1;
 		grid[1]=a2;
-		grid[2]=a3;
-		//grid[3]=a4;
-		hg.countComponents(5,grid);
+//		grid[2]=a3;
+//		grid[3]=a4;
+//		grid[4]=a5;
+		ArrayDS ads=new ArrayDS();
+		ads.longestDiverseString(2,2,1);
 				
 		
 	}

@@ -44,14 +44,14 @@ public class TestMain {
 //		grid[3]=a4;
 //		grid[4]=a5;
 		ArrayDS ads=new ArrayDS();
-	//	ads.longestDiverseString(2,2,1);
+		ads.wordPattern("abba", "dog cat cat d");
 				
-		Trie trie=new Trie();
-		String[] words= {"apple","app","dog","apple","ant"};
-		for(String word:words) {
-			trie.insert(word);
-		}
-		System.out.println(trie.search("dog"));
+//		Trie trie=new Trie();
+//		String[] words= {"apple","app","dog","apple","ant"};
+//		for(String word:words) {
+//			trie.insert(word);
+//		}
+	//	System.out.println(trie.search("dog"));
 	}
 
 }

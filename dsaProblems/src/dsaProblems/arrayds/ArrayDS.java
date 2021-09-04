@@ -3,7 +3,9 @@ package dsaProblems.arrayds;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -140,6 +142,56 @@ public class ArrayDS {
 	            }
 	        }
 	        return sb.toString(); 
+	    }
+	   
+	   public int findKthPositive(int[] arr, int k) {
+	        int left = 0, right = arr.length - 1;
+	        while (left <= right) {
+	            int pivot = left + (right - left) / 2;
+	            // If number of positive integers
+	            // which are missing before arr[pivot]
+	            // is less than k -->
+	            // continue to search on the right.
+	            if (arr[pivot] - pivot - 1 < k) {
+	                left = pivot + 1;
+	            // Otherwise, go left.
+	            } else {
+	                right = pivot - 1;
+	            }
+	        }
+
+	        // At the end of the loop, left = right + 1,
+	        // and the kth missing is in-between arr[right] and arr[left].
+	        // The number of integers missing before arr[right] is
+	        // arr[right] - right - 1 -->
+	        // the number to return is
+	        // arr[right] + k - (arr[right] - right - 1) = k + left
+	        return left + k;
+	    }
+	   
+	   public int missingElement(int[] nums, int k) {
+		   int left = 0, right = nums.length - 1;
+	        while(left <= right){
+	            int mid = left + (right - left) / 2;
+	            if(nums[mid] - nums[0] - mid < k)
+	                left = mid + 1;
+	            else 
+	                right = mid - 1;
+	        }
+	        return nums[0] + k + left - 1;
+	    }
+	   
+	   public boolean wordPattern(String pattern, String s) {
+	        Map map=new HashMap();
+	        String[] arr=s.split(" ");
+	        if(arr.length!=pattern.length()){
+	            return false;
+	        }
+	        for(Integer i=0;i<pattern.length();++i){
+	        if (map.put(pattern.charAt(i), i) != map.put(arr[i], i))
+	            return false;
+	        }
+	        return true;
 	    }
 	    
 }

@@ -44,7 +44,7 @@ public class TestMain {
 //		grid[3]=a4;
 //		grid[4]=a5;
 		ArrayDS ads=new ArrayDS();
-		ads.isIsomorphic("add","egg");
+		ads.containsNearbyDuplicate(new int[]{1,2,3,1}, 3);
 				
 //		Trie trie=new Trie();
 //		String[] words= {"apple","app","dog","apple","ant"};

@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Set;
 
 public class ArrayDS {
 
@@ -214,6 +216,17 @@ public class ArrayDS {
 	            m2[t1[i]] = i + 1;
 	        }
 	        return true;
+	    }
+	   
+	   public boolean containsNearbyDuplicate(int[] nums, int k) {
+	        Set<Integer> set = new HashSet<Integer>();
+	        for(int i = 0; i < nums.length; i++){
+	            if(i > k) 
+	            	set.remove(nums[i-k-1]);
+	            if(!set.add(nums[i])) 
+	            	return true;
+	        }
+	        return false;
 	    }
 	    
 }

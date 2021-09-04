@@ -193,5 +193,27 @@ public class ArrayDS {
 	        }
 	        return true;
 	    }
+	   
+	   public int titleToNumber(String columnTitle) {
+	        int result = 0;
+	        for (int i = 0; i < columnTitle.length(); i++){
+	            result = result * 26 + (columnTitle.charAt(i) - 'A' + 1);
+	        }
+	        return result;
+	    }
+	   
+	   public boolean isIsomorphic(String s, String t) {
+		   int[] m1=new int[256], m2= new int[256];
+	        int n = s.length();
+	        char[] s1=s.toCharArray();
+	        char[] t1=t.toCharArray();
+	        for (int i = 0; i < n; ++i) {
+	            if (m1[s1[i]] != m2[t1[i]]) 
+	                return false;
+	            m1[s1[i]] = i + 1;
+	            m2[t1[i]] = i + 1;
+	        }
+	        return true;
+	    }
 	    
 }

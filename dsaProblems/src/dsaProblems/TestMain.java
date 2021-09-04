@@ -44,7 +44,7 @@ public class TestMain {
 //		grid[3]=a4;
 //		grid[4]=a5;
 		ArrayDS ads=new ArrayDS();
-		ads.wordPattern("abba", "dog cat cat d");
+		ads.isIsomorphic("add","egg");
 				
 //		Trie trie=new Trie();
 //		String[] words= {"apple","app","dog","apple","ant"};

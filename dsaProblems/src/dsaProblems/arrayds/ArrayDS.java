@@ -228,5 +228,43 @@ public class ArrayDS {
 	        }
 	        return false;
 	    }
+	   
+	   public List<Integer> partitionLabels(String S) {
+	        Integer[] positions = new Integer[26];
+	        char[] chs = S.toCharArray ();
+	        for (int i = 0; i < chs.length; i++)
+	            positions[chs[i] - 'a'] = i;
+	        List<Integer> resLs = new ArrayList<> ();
+	        int pos = 0, end = 0, anchor = 0;
+	        while (pos < chs.length) {
+	            end = Math.max (positions[chs[pos] - 'a'], end);
+	            if (pos == end) {
+	                resLs.add (pos - anchor + 1);
+	                anchor = pos + 1;
+	            }
+	            pos++;
+	        }
+	        return resLs;
+	    }
+	   
+	   public int maxProfit(int[] inventory, int orders) {
+	        int profit=0;
+	        PriorityQueue<Integer> pq=new PriorityQueue<>((a,b)->b-a);
+	        for(int n:inventory){
+	            pq.add(n);
+	        }
+	        while(orders>0 && !pq.isEmpty()){
+	            int n=pq.poll();
+	            orders--;
+	            profit+=n;
+	            if(orders==0){
+	                return profit % 1000000007;
+	            }
+	            if(!pq.isEmpty() && pq.peek()<n-1){
+	                pq.add(n-1);
+	            }
+	        }
+	        return (profit % 1000000007);
+	    }
 	    
 }

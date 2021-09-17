@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -265,6 +266,29 @@ public class ArrayDS {
 	            }
 	        }
 	        return (profit % 1000000007);
+	    }
+	   
+	   static String chars[] =  {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+	    public List<String> letterCombinations(String digits) {
+	      
+	      
+	      int n=digits.length();
+	      LinkedList<String> ans=new LinkedList<>(); 
+	          if(n==0){
+	            return ans;
+	        }
+	        ans.add("");
+			for(int i =0; i<digits.length();i++){
+				int x = Character.getNumericValue(digits.charAt(i));
+				while(ans.peek().length()==i){
+					String t = ans.remove();
+					for(char s : chars[x].toCharArray())
+						ans.add(t+s);
+				}
+			}
+			return ans;
+	     //  findCombination(digits,0,"");
+	     //  return list;
 	    }
 	    
 }

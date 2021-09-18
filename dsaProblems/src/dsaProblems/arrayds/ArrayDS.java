@@ -291,4 +291,35 @@ public class ArrayDS {
 	     //  return list;
 	    }
 	    
+	    public List<List<String>> groupAnagrams(String[] strs) {
+	        
+	        List<List<String>> result= new ArrayList<>();
+
+	        HashMap<String ,ArrayList<String>> map= new HashMap<>();
+	        ArrayList<String> al;
+	        for(int i=0;i<strs.length;i++){
+	            String s1=strs[i];        
+	            char ch[]=strs[i].toCharArray();
+	            
+	            Arrays.sort(ch);
+	            
+	            String ch1=new String(ch);
+	            
+	            if(map.containsKey(ch1)){
+	                al= map.get(ch1);  
+	            }
+	            else
+	            {
+	               al= new ArrayList<>();
+	            }
+	               al.add(s1);
+	               map.put(ch1,al);
+	        }
+	        for(Map.Entry<String,ArrayList<String>> ans :map.entrySet()){
+	            result.add(ans.getValue());
+	        }
+	        return result;
+	        }
+	        
+	    
 }

@@ -45,7 +45,7 @@ public class TestMain {
 //		grid[3]=a4;
 //		grid[4]=a5;
 		ArrayDS ads=new ArrayDS();
-		ads.letterCombinations("23");
+		ads.groupAnagrams(new String[] {"eat","tea","tan","ate","nat","bat"});
 			Tree tree=new Tree();
 			//tree.splitBST(new int[] {4,2,6,1,3,5,7},2);
 //		Trie trie=new Trie();

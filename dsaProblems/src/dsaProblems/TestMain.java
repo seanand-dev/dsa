@@ -8,6 +8,7 @@ import java.util.Stack;
 import dsaProblems.arrayds.ArrayDS;
 import dsaProblems.graphds.GraphHelper;
 import dsaProblems.tree.Tree;
+import dsaProblems.trie.Trie;
 
 public class TestMain {
 
@@ -45,16 +46,21 @@ public class TestMain {
 //		grid[3]=a4;
 //		grid[4]=a5;
 		ArrayDS ads=new ArrayDS();
-		ads.longestSubstring("ababbc", 2);
+		ads.findMaxLength(new int[] {0,1,0});
 		Stack<Integer> st=new Stack<>();
 			Tree tree=new Tree();
 			//tree.splitBST(new int[] {4,2,6,1,3,5,7},2);
-//		Trie trie=new Trie();
-//		String[] words= {"apple","app","dog","apple","ant"};
+		Trie trie=new Trie();
+		String[] words= {"oath","pea","eat","rain"};
 //		for(String word:words) {
 //			trie.insert(word);
 //		}
+		//trie.findWords(words);
 	//	System.out.println(trie.search("dog"));
 	}
+	
+	
+	
+	
 
 }

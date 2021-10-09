@@ -456,85 +456,131 @@ public class ArrayDS {
 
 		return ip == p.length();
 	}
-	
-	 public boolean isMatch(String s, String p) {
-	       if(p.length()==0){
-	           return s.length()==0;
-	       }
-	        if(p.length()>1 && p.charAt(1)=='*'){
-	            if(isMatch(s,p.substring(2))){
-	                return true;
-	            }
-	            if(s.length()>0 && (p.charAt(0)=='.'|| s.charAt(0)==p.charAt(0))){
-	                  return isMatch(s.substring(1), p);
-	            }
-	            return false;
-	        }else{
-	               if(s.length()>0 && (p.charAt(0)=='.'|| s.charAt(0)==p.charAt(0))){
-	                  return isMatch(s.substring(1), p.substring(1));
-	            }
-	            return false;
-	        }
-	        
-	    }
-	 
-	 public String minWindow(String s, String t) {
-	        if(t.length()> s.length()) return "";
-	        Map<Character, Integer> map = new HashMap<>();
-	        for(char c : t.toCharArray()){
-	            map.put(c, map.getOrDefault(c,0) + 1);
-	        }
-	        int counter = map.size();
-	        
-	        int begin = 0, end = 0;
-	        int head = 0;
-	        int len = Integer.MAX_VALUE;
-	        
-	        while(end < s.length()){
-	            char c = s.charAt(end);
-	            if( map.containsKey(c) ){
-	                map.put(c, map.get(c)-1);
-	                if(map.get(c) == 0) counter--;
-	            }
-	            end++;
-	            
-	            while(counter == 0){
-	                char tempc = s.charAt(begin);
-	                if(map.containsKey(tempc)){
-	                    map.put(tempc, map.get(tempc) + 1);
-	                    if(map.get(tempc) > 0){
-	                        counter++;
-	                    }
-	                }
-	                if(end-begin < len){
-	                    len = end - begin;
-	                    head = begin;
-	                }
-	                begin++;
-	            }
-	            
-	        }
-	        if(len == Integer.MAX_VALUE) return "";
-	        return s.substring(head, head+len);
-	    }
-	    public int firstMissingPositive(int[] nums) {
-	        int i=0;
-	        while(i<nums.length){
-	            int correct=nums[i]-1;
-	            if(nums[i]>0 && nums[i]<=nums.length && nums[i]!=nums[correct]){
-	                int temp=nums[i];
-	                nums[i]=nums[correct];
-	                nums[correct]=temp;
-	            }else{
-	                i++;
-	            }
-	        }
-	        for( i=0;i<nums.length;i++){
-	            if(nums[i]!=i+1){
-	                return i+1;
-	            }
-	        }
-	        return nums.length+1;
-	    }
+
+	public boolean isMatch(String s, String p) {
+		if (p.length() == 0) {
+			return s.length() == 0;
+		}
+		if (p.length() > 1 && p.charAt(1) == '*') {
+			if (isMatch(s, p.substring(2))) {
+				return true;
+			}
+			if (s.length() > 0 && (p.charAt(0) == '.' || s.charAt(0) == p.charAt(0))) {
+				return isMatch(s.substring(1), p);
+			}
+			return false;
+		} else {
+			if (s.length() > 0 && (p.charAt(0) == '.' || s.charAt(0) == p.charAt(0))) {
+				return isMatch(s.substring(1), p.substring(1));
+			}
+			return false;
+		}
+
+	}
+
+	public String minWindow(String s, String t) {
+		if (t.length() > s.length())
+			return "";
+		Map<Character, Integer> map = new HashMap<>();
+		for (char c : t.toCharArray()) {
+			map.put(c, map.getOrDefault(c, 0) + 1);
+		}
+		int counter = map.size();
+
+		int begin = 0, end = 0;
+		int head = 0;
+		int len = Integer.MAX_VALUE;
+
+		while (end < s.length()) {
+			char c = s.charAt(end);
+			if (map.containsKey(c)) {
+				map.put(c, map.get(c) - 1);
+				if (map.get(c) == 0)
+					counter--;
+			}
+			end++;
+
+			while (counter == 0) {
+				char tempc = s.charAt(begin);
+				if (map.containsKey(tempc)) {
+					map.put(tempc, map.get(tempc) + 1);
+					if (map.get(tempc) > 0) {
+						counter++;
+					}
+				}
+				if (end - begin < len) {
+					len = end - begin;
+					head = begin;
+				}
+				begin++;
+			}
+
+		}
+		if (len == Integer.MAX_VALUE)
+			return "";
+		return s.substring(head, head + len);
+	}
+
+	public int firstMissingPositive(int[] nums) {
+		int i = 0;
+		while (i < nums.length) {
+			int correct = nums[i] - 1;
+			if (nums[i] > 0 && nums[i] <= nums.length && nums[i] != nums[correct]) {
+				int temp = nums[i];
+				nums[i] = nums[correct];
+				nums[correct] = temp;
+			} else {
+				i++;
+			}
+		}
+		for (i = 0; i < nums.length; i++) {
+			if (nums[i] != i + 1) {
+				return i + 1;
+			}
+		}
+		return nums.length + 1;
+	}
+
+	public String fractionToDecimal(int num, int den) {
+
+		if (num == 0)
+			return "0";
+
+		StringBuilder res = new StringBuilder();
+
+		// Negative sign is appended if either of num or den is negative
+		res.append((num > 0) ^ (den > 0) ? "-" : "");
+
+		// Get rid of signs and convert to long to prevent overflow
+		long n = Math.abs((long) num);
+		long d = Math.abs((long) den);
+
+		// Append the integral part
+		res.append(n / d);
+
+		n %= d;
+		if (n == 0)
+			return res.toString(); // Cause there is no fraction
+
+		// Append the fraction
+		res.append(".");
+		HashMap<Long, Integer> hm = new HashMap(); // Map will store remainders and their positions
+		hm.put(n, res.length());
+		while (n != 0) { // We will break in case of recurring fraction
+			n *= 10;
+			res.append(n / d);
+			n %= d;
+
+			Integer remainderIndex = hm.get(n);
+			if (remainderIndex != null) { // We have a recurrence
+				res.insert(remainderIndex, "(");
+				res.append(")");
+				return res.toString();
+			} else {
+				hm.put(n, res.length()); // Add for future checks
+			}
+		}
+		return res.toString();
+	}
 
 }

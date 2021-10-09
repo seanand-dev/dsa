@@ -430,4 +430,52 @@ public class ArrayDS {
 		return false;
 	}
 
+	public boolean isMatchR(String s, String p) {
+		int is = 0, ip = 0, star = -1, match = 0;
+		while (is < s.length()) {
+			if (ip < p.length() && (p.charAt(ip) == '?' || p.charAt(ip) == s.charAt(is))) {
+				ip++;
+				is++;
+			} else if (ip < p.length() && p.charAt(ip) == '*') {
+				star = ip;
+				match = is;
+				ip++;
+			} else if (star != -1) {
+				ip = star + 1;
+				match++;
+				is = match;
+
+			} else {
+				return false;
+			}
+		}
+
+		while (ip < p.length() && p.charAt(ip) == '*') {
+			ip++;
+		}
+
+		return ip == p.length();
+	}
+	
+	 public boolean isMatch(String s, String p) {
+	       if(p.length()==0){
+	           return s.length()==0;
+	       }
+	        if(p.length()>1 && p.charAt(1)=='*'){
+	            if(isMatch(s,p.substring(2))){
+	                return true;
+	            }
+	            if(s.length()>0 && (p.charAt(0)=='.'|| s.charAt(0)==p.charAt(0))){
+	                  return isMatch(s.substring(1), p);
+	            }
+	            return false;
+	        }else{
+	               if(s.length()>0 && (p.charAt(0)=='.'|| s.charAt(0)==p.charAt(0))){
+	                  return isMatch(s.substring(1), p.substring(1));
+	            }
+	            return false;
+	        }
+	        
+	    }
+
 }

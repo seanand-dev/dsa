@@ -477,5 +477,64 @@ public class ArrayDS {
 	        }
 	        
 	    }
+	 
+	 public String minWindow(String s, String t) {
+	        if(t.length()> s.length()) return "";
+	        Map<Character, Integer> map = new HashMap<>();
+	        for(char c : t.toCharArray()){
+	            map.put(c, map.getOrDefault(c,0) + 1);
+	        }
+	        int counter = map.size();
+	        
+	        int begin = 0, end = 0;
+	        int head = 0;
+	        int len = Integer.MAX_VALUE;
+	        
+	        while(end < s.length()){
+	            char c = s.charAt(end);
+	            if( map.containsKey(c) ){
+	                map.put(c, map.get(c)-1);
+	                if(map.get(c) == 0) counter--;
+	            }
+	            end++;
+	            
+	            while(counter == 0){
+	                char tempc = s.charAt(begin);
+	                if(map.containsKey(tempc)){
+	                    map.put(tempc, map.get(tempc) + 1);
+	                    if(map.get(tempc) > 0){
+	                        counter++;
+	                    }
+	                }
+	                if(end-begin < len){
+	                    len = end - begin;
+	                    head = begin;
+	                }
+	                begin++;
+	            }
+	            
+	        }
+	        if(len == Integer.MAX_VALUE) return "";
+	        return s.substring(head, head+len);
+	    }
+	    public int firstMissingPositive(int[] nums) {
+	        int i=0;
+	        while(i<nums.length){
+	            int correct=nums[i]-1;
+	            if(nums[i]>0 && nums[i]<=nums.length && nums[i]!=nums[correct]){
+	                int temp=nums[i];
+	                nums[i]=nums[correct];
+	                nums[correct]=temp;
+	            }else{
+	                i++;
+	            }
+	        }
+	        for( i=0;i<nums.length;i++){
+	            if(nums[i]!=i+1){
+	                return i+1;
+	            }
+	        }
+	        return nums.length+1;
+	    }
 
 }

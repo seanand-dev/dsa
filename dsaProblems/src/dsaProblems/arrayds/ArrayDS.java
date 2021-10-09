@@ -587,5 +587,25 @@ public class ArrayDS {
 	        Arrays.sort(array, (String s1, String s2) -> (s2 + s1).compareTo(s1 + s2));
 	        return Arrays.stream(array).reduce((x, y) -> x.equals("0") ? y : x + y).get(); 
 	    }
+	  public double myPow(double x, int n) {
+	        long pow=n;
+	        if(pow<0){
+	            pow=-1*pow;
+	        }
+	        double ans=1.0;
+	        while(pow>0){
+	            if(pow%2==1){
+	                ans=ans*x;
+	                pow=pow-1;
+	            }else{
+	                x=x*x;
+	                pow=pow/2;
+	            }
+	        }
+	        if(n<0){
+	            ans=(double) 1.0/(double) ans;
+	        }
+	        return ans;
+	    }
 
 }

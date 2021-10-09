@@ -46,7 +46,7 @@ public class TestMain {
 //		grid[3]=a4;
 //		grid[4]=a5;
 		ArrayDS ads=new ArrayDS();
-		ads.fractionToDecimal(4,333);
+		ads.largestNumber(new int[] {10,2});
 		Stack<Integer> st=new Stack<>();
 			Tree tree=new Tree();
 			//tree.splitBST(new int[] {4,2,6,1,3,5,7},2);

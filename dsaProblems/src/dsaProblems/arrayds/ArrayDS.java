@@ -624,5 +624,16 @@ public class ArrayDS {
 
 		return count;
 	}
+	public String addFraction(int num1,int den1,int num2,int den2) {
+	
+    int num=num1*den2+num2*den1;
+    int den=den1*den2;
+    int result=Math.abs(gcd(num,den));
+    System.out.println(num/result+"/"+den/result);
+    return num/result+"/"+den/result;
+	}
+	int gcd(int a,int b) {
+		return (a==0||b==0)?a+b:gcd(b%a,a);
+	}
 
 }

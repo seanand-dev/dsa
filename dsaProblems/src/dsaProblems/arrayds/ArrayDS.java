@@ -624,16 +624,103 @@ public class ArrayDS {
 
 		return count;
 	}
-	public String addFraction(int num1,int den1,int num2,int den2) {
-	
-    int num=num1*den2+num2*den1;
-    int den=den1*den2;
-    int result=Math.abs(gcd(num,den));
-    System.out.println(num/result+"/"+den/result);
-    return num/result+"/"+den/result;
+
+	public String addFraction(int num1, int den1, int num2, int den2) {
+
+		int num = num1 * den2 + num2 * den1;
+		int den = den1 * den2;
+		int result = Math.abs(gcd(num, den));
+		System.out.println(num / result + "/" + den / result);
+		return num / result + "/" + den / result;
 	}
-	int gcd(int a,int b) {
-		return (a==0||b==0)?a+b:gcd(b%a,a);
+
+	int gcd(int a, int b) {
+		return (a == 0 || b == 0) ? a + b : gcd(b % a, a);
+	}
+
+	public int deleteAndEarn(int[] nums) {
+		int[] map = new int[10];
+		for (int num : nums) {
+			map[num] += num;
+		}
+		int prev = 0;
+		int curr = 0;
+		int temp;
+		for (int value : map) {
+			temp = curr;
+			curr = Math.max(curr, prev + value);
+			prev = temp;
+		}
+		return curr;
+	}
+//	Input: rating = [2,5,3,4,1]
+//	Output: 3
+//   (2,3,4), (5,4,1), (5,3,1). 
+	 public int numTeams(int[] rating) {
+         int n=rating.length,res=0,rightLess,rightGreat,leftLess,leftGreat;
+        if(n<3)return 0;
+        for(int i=1;i<n-1;i++){
+            rightLess=0;rightGreat=0; leftLess=0; leftGreat=0;
+            for(int j=0;j<i;j++){
+                if(rating[j]<rating[i])
+                	leftLess++;
+                else 
+                	leftGreat++;
+            }    
+            for(int j=i+1;j<n;j++){
+                if(rating[j]>rating[i])
+                	rightGreat++;
+                else 
+                	rightLess++;
+            }
+            res=res+leftLess*rightGreat + leftGreat*rightLess;
+        }
+        return res;
+    }
+	int lo=0,maxLen=0;
+	 public String longestPalindrome(String s) {
+	    int len = s.length();
+		if (len < 2)
+			return s;
+		
+	    for (int i = 0; i < len-1; i++) {
+	     	extendPalindrome(s, i, i); 
+	     	extendPalindrome(s, i, i+1); 
+	    }
+	    return s.substring(lo, lo + maxLen);
+	}
+
+	private void extendPalindrome(String s, int low, int high) {
+		System.out.println(s.substring(low, high+1));
+		while (low >= 0 && high < s.length() && s.charAt(low) == s.charAt(high)) {
+			low--;
+			high++;
+		}
+		if (maxLen < high - low - 1) {
+			lo = low + 1;
+			maxLen = high - low - 1;
+		}
+	}
+	
+	public List<String> generateParenthesis(int n) {
+	    List<String> list = new ArrayList<String>();
+	    generateOneByOne("", list, n, n);
+	    return list;
+	}
+	public void generateOneByOne(String sublist, List<String> list, int left, int right){
+	    if(left > right){
+	        return;
+	    }
+	    if(left > 0){
+	        generateOneByOne( sublist + "(" , list, left-1, right);
+	    }
+	    if(right > 0){
+	        generateOneByOne( sublist + ")" , list, left, right-1);
+	    }
+	    if(left == 0 && right == 0){
+	        list.add(sublist);
+	        return;
+	    }
 	}
 
 }
